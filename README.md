@@ -27,5 +27,5 @@ Technologies used in the project:
 
 <h2>📸 Screenshot </h2>
 
-![App Screenshot](https://ibb.co/7KJGF8Z)
+![App Screenshot](https://i.ibb.co/x6SMQPB/Capture-d-e-cran-2022-05-22-a-00-40-46.png)
 
