@@ -574,7 +574,7 @@ li {
 }
 
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 730px) {
   body {
     overflow:visible;
     height: auto;

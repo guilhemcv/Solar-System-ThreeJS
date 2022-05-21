@@ -43,7 +43,7 @@ export const Planet = () => {
 
     const scene = new THREE.Scene();
     let camera = '';
-    if (window.innerWidth <= 600) {
+    if (window.innerWidth <= 730) {
       camera = new THREE.PerspectiveCamera(
         25,
         window.innerWidth  / window.innerHeight ,
