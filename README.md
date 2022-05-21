@@ -1,4 +1,4 @@
-<h1 align="center" id="title">Solar System - traveling through the unverse</h1>
+<h1 align="center" id="title">Solar System - traveling through the universe</h1>
 
 <p id="description">I made this web app to discover and practice Three.js 3D Library.</p>
 
@@ -24,3 +24,4 @@ Technologies used in the project:
 *   React
 *   Three.js
 *   Css
+
