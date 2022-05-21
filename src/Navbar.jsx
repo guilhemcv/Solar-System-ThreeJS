@@ -29,8 +29,10 @@ export const Navbar = ({lien, planet}) => {
   return (
     <div>
       <nav>
-        <img src={logo} alt="logo navbar" height="60px" srcset="" />
-        <p className='title'><a href={showLien}>{title} - Cliquer pour + de détails</a></p>
+        <a href="/">
+        <img src={logo} alt="logo navbar" className="logoNav" height="60px" srcset="" />
+        </a>
+        {title !== "" && <p className='title pulsate-bck'><a href={showLien}>{title} - Cliquer pour + de détails</a></p>}
         <select name="planete" id="" onChange={(e) => handleChange(e)}>
           <option value="">Choisir une planète :</option>
           {planets.map((p) => (

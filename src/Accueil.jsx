@@ -1,16 +1,38 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { planets } from './data/Planets';
 import './App.css';
 import { Footer } from './Footer';
 import { Navbar } from './Navbar';
+import planetes from './assets/planetesAccueil.png';
+import fusee from './assets/fuseeAccueil.png';
 
 export const Accueil = () => {
   return (
     <div>
-      <Navbar/>
+      <Navbar />
       <div className="accueil">
-        <h1 className="titre">Bienvenue sur les planetes</h1>
+        <img
+          src={fusee}
+          className="imgfusee"
+          alt="fusée"
+          srcset=""
+        />
+        <h1 className="titre fade-in">
+          Départ imminent pour le système solaire...
+        </h1>
+        <div className="flicker-in-1 paraphoto">
+          <p className="paragraphe flicker-in-1">
+            Toujours plus loin, toujours plus haut... Le monde a toujours voulu
+            découvrir ce qui se cache au dessus de nos têtes. Aujourd'hui, il
+            est possible de voyager depuis son ordinateur, alors sélectionnez
+            une planète dans le menu du haut et préparer vous au décollage...
+          </p>
+          <img
+            src={planetes}
+            className="planetesacc"
+            alt="planètes"
+            srcset=""
+          />
+        </div>
       </div>
       <Footer />
     </div>

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import './App.css';
@@ -31,16 +32,32 @@ export const Planet = () => {
   }, [isClicked]);
 
   useEffect(() => {
+    // make the design responsive
+    window.addEventListener('resize', () => {
+      setPlanetWidth(window.innerWidth);
+      setPlanetHeight(window.innerHeight);
+    });
+
     const planetToShow = planets.find((p) => p.url === planet);
     setPlanetToShow(planetToShow);
 
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(
-      planetToShow.height,
-      window.innerWidth / window.innerHeight,
-      0.1,
-      2000
-    );
+    let camera = '';
+    if (window.innerWidth <= 600) {
+      camera = new THREE.PerspectiveCamera(
+        25,
+        window.innerWidth  / window.innerHeight ,
+        0.1,
+        2000
+      );
+    } else {
+      camera = new THREE.PerspectiveCamera(
+        planetToShow.height,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        2000
+      );
+    }
     camera.position.set(0, 0, 10);
     const renderer = new THREE.WebGLRenderer({
       canvas: document.querySelector('#bg'),
@@ -67,6 +84,18 @@ export const Planet = () => {
     });
     const world = new THREE.Mesh(worldGeometry, worldMaterial);
     scene.add(world);
+    if (planetToShow.anneaux === true) {
+      const geometry = new THREE.RingGeometry(1.2, 2, 32);
+      const ringTexture = new THREE.TextureLoader().load(planetToShow.texture);
+      const material = new THREE.MeshBasicMaterial({
+        map: ringTexture,
+        side: THREE.DoubleSide,
+      });
+      const mesh = new THREE.Mesh(geometry, material);
+      mesh.rotation.x = 30;
+
+      scene.add(mesh);
+    }
 
     const animate = () => {
       requestAnimationFrame(animate);
@@ -80,33 +109,39 @@ export const Planet = () => {
   }, [planet]);
 
   return (
-    <>
-      <div className='page-planet'>
-        <Navbar lien="#info" planet={planetToShow.name}/>
-          
-          <canvas id="bg"></canvas>
-        </div>
+    <div className="global">
+      <div className="page-planet">
+        <Navbar lien="#info" planet={planetToShow.name} />
 
-        <div id="info">
-          <img src={planetToShow.imageDescri} alt="" width="700px" srcset="" />
-          <div className="descri">
-            <h1 style={{ marginBottom: '30px' }}>{planetToShow.name}</h1>
-            <p style={{ marginBottom: '20px' }}>{planetToShow.description}</p>
-            <ul>
-              <li>Distance du soleil : {planetToShow.distanceFromSun}</li>
-              <li>Superficie : {planetToShow.superficie}</li>
-              <li>Rayon : {planetToShow.rayon}</li>
-              <li>Durée du jour : {planetToShow.dureeJour}</li>
-              <li>Masse : {planetToShow.masse}</li>
-              <li>Période Orbitale : {planetToShow.periodeOrbitale}</li>
-              <li>Age : {planetToShow.age}</li>
-            </ul>
-            <a href="#bg" className="top pulsate-fwd">
-              <img src={up} alt="" srcset="" />
-            </a>
-          </div>
+        <canvas id="bg"></canvas>
+      </div>
+
+      <div id="info">
+        <img
+          className="imagedescri"
+          src={planetToShow.imageDescri}
+          alt=""
+          width="700px"
+          srcset=""
+        />
+        <div className="descri">
+          <h1 style={{ marginBottom: '30px' }}>{planetToShow.name}</h1>
+          <p style={{ marginBottom: '20px' }}>{planetToShow.description}</p>
+          <ul>
+            <li>Distance du soleil : {planetToShow.distanceFromSun}</li>
+            <li>Superficie : {planetToShow.superficie}</li>
+            <li>Rayon : {planetToShow.rayon}</li>
+            <li>Durée du jour : {planetToShow.dureeJour}</li>
+            <li>Masse : {planetToShow.masse}</li>
+            <li>Période Orbitale : {planetToShow.periodeOrbitale}</li>
+            <li>Age : {planetToShow.age}</li>
+          </ul>
+          <a href="#bg" className="top pulsate-fwd">
+            <img src={up} alt="" srcset="" />
+          </a>
+        </div>
       </div>
       <Footer />
-    </>
+    </div>
   );
 };
