@@ -26,6 +26,8 @@ export const Navbar = ({lien, planet}) => {
     navigate(`/${event.target.value}#bg`);
   };
 
+
+
   return (
     <div>
       <nav>

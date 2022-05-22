@@ -46,7 +46,7 @@ export const Planet = () => {
     if (window.innerWidth <= 730) {
       camera = new THREE.PerspectiveCamera(
         25,
-        window.innerWidth  / window.innerHeight ,
+        window.innerWidth / window.innerHeight,
         0.1,
         2000
       );
@@ -111,7 +111,11 @@ export const Planet = () => {
   return (
     <div className="global">
       <div className="page-planet">
-        <Navbar lien="#info" planet={planetToShow.name} />
+        {window.location.hash === '#info' && window.innerWidth > 730 ? (
+          ''
+        ) : (
+          <Navbar lien="#info" planet={planetToShow.name} />
+        )}
 
         <canvas id="bg"></canvas>
       </div>
@@ -138,6 +142,7 @@ export const Planet = () => {
           </ul>
           <a href="#bg" className="top pulsate-fwd">
             <img src={up} alt="" srcset="" />
+            <p>(retour)</p>
           </a>
         </div>
       </div>
