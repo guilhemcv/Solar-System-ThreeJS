@@ -649,4 +649,9 @@ h3 {
   font-size : 15px;
 }
 
+select {
+  margin-right: 0px;
+  margin-bottom : 10px;
+}
+
 }

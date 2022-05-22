@@ -24,7 +24,7 @@ export const Accueil = () => {
             Toujours plus loin, toujours plus haut... Le monde a toujours voulu
             découvrir ce qui se cache au dessus de nos têtes. Aujourd'hui, il
             est possible de voyager depuis son ordinateur, alors sélectionnez
-            une planète dans le menu du haut et préparer vous au décollage...
+            une planète dans le menu du haut et préparez vous au décollage...
           </p>
           <img
             src={planetes}
