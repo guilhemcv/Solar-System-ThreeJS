@@ -9,8 +9,7 @@ import { planets } from './data/Planets';
 import { Footer } from './Footer';
 import up from './assets/up-arrow.png';
 import { Navbar } from './Navbar';
-import LoadingSpin from "react-loading-spin";
-
+import LoadingSpin from 'react-loading-spin';
 
 export const Planet = () => {
   const { planet } = useParams();
@@ -143,9 +142,11 @@ export const Planet = () => {
         ) : (
           <Navbar lien="#info" planet={planetToShow.name} />
         )}
-        <div className={!loaded ? 'show spin' : 'hidden'}>
-          <LoadingSpin/>
-        </div>
+        {!loaded && (
+          <div className="spin">
+            <LoadingSpin />
+          </div>
+        )}
         <canvas className={!loaded ? 'hidden' : 'show'} id="bg"></canvas>
       </div>
 
