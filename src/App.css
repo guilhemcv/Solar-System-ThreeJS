@@ -584,12 +584,9 @@ li {
   visibility : visible;
 }
 
-.loading {
-  font-size : 40px;
-  text-align:center;
-  margin-top : 300px;
-  color: white;
-  height: 100vh;
+.spin {
+  margin-top: 300px;
+  text-align: center;
 }
 
 @media screen and (max-width: 730px) {
