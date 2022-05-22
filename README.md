@@ -4,7 +4,7 @@
 
 <h2>🚀 Demo</h2>
 
-[https://solar-system-threejs-guilhemcv.vercel.app/](https://solar-system-threejs-guilhemcv.vercel.app/)
+[https://solar-system-threejs.vercel.app/](https://solar-system-threejs.vercel.app/)
 
   
   
