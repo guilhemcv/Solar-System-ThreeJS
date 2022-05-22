@@ -12,6 +12,7 @@ import { Navbar } from './Navbar';
 
 export const Planet = () => {
   const { planet } = useParams();
+  const [loaded, setIsLoaded] = useState(false);
   const [planetWidth, setPlanetWidth] = useState(window.innerWidth);
   const [planetHeight, setPlanetHeight] = useState(window.innerHeight);
   const [planetToShow, setPlanetToShow] = useState({
@@ -25,23 +26,47 @@ export const Planet = () => {
       setPlanetHeight(window.innerHeight * 0.2);
       setPlanetWidth(window.innerWidth * 0.2);
     } else {
-      // on second click, get back to normal
       setPlanetHeight(window.innerHeight);
       setPlanetWidth(window.innerWidth);
     }
   }, [isClicked]);
 
   useEffect(() => {
-    // make the design responsive
     window.addEventListener('resize', () => {
       setPlanetWidth(window.innerWidth);
       setPlanetHeight(window.innerHeight);
     });
-
     const planetToShow = planets.find((p) => p.url === planet);
     setPlanetToShow(planetToShow);
-
     const scene = new THREE.Scene();
+    const manager = new THREE.LoadingManager();
+
+    manager.onStart = function (url, itemsLoaded, itemsTotal) {
+      console.log(
+        'Started loading file: ' +
+          url +
+          '.\nLoaded ' +
+          itemsLoaded +
+          ' of ' +
+          itemsTotal +
+          ' files.'
+      );
+      setIsLoaded(false);
+    };
+
+    manager.onProgress = function (item, loaded, total) {
+      console.log(item, loaded, total);
+    };
+
+    manager.onLoad = function () {
+      console.log('all items loaded');
+      setInterval(() => {
+        setIsLoaded(true);
+      }, 3000);
+    };
+    manager.onError = function () {
+      console.log('there has been an error');
+    };
     let camera = '';
     if (window.innerWidth <= 730) {
       camera = new THREE.PerspectiveCamera(
@@ -77,13 +102,14 @@ export const Planet = () => {
     controls.minDistance = 3;
     controls.maxDistance = 200;
 
-    const worldTexture = new THREE.TextureLoader().load(planetToShow.image);
+    const worldTexture = new THREE.TextureLoader(manager);
     const worldGeometry = new THREE.SphereGeometry(1, 40, 40);
     const worldMaterial = new THREE.MeshBasicMaterial({
-      map: worldTexture,
+      map: worldTexture.load(planetToShow.image),
     });
     const world = new THREE.Mesh(worldGeometry, worldMaterial);
     scene.add(world);
+
     if (planetToShow.anneaux === true) {
       const geometry = new THREE.RingGeometry(1.2, 2, 32);
       const ringTexture = new THREE.TextureLoader().load(planetToShow.texture);
@@ -104,7 +130,6 @@ export const Planet = () => {
       controls.update();
       renderer.render(scene, camera);
     };
-
     animate();
   }, [planet]);
 
@@ -116,17 +141,18 @@ export const Planet = () => {
         ) : (
           <Navbar lien="#info" planet={planetToShow.name} />
         )}
-
-        <canvas id="bg"></canvas>
+        <div className={!loaded ? 'show loading pulsate-bck' : 'hidden'}>
+          <h2>Chargement...</h2>
+        </div>
+        <canvas className={!loaded ? 'hidden' : 'show'} id="bg"></canvas>
       </div>
 
       <div id="info">
         <img
           className="imagedescri"
           src={planetToShow.imageDescri}
-          alt=""
+          alt="planete"
           width="700px"
-          srcset=""
         />
         <div className="descri">
           <h1 style={{ marginBottom: '30px' }}>{planetToShow.name}</h1>

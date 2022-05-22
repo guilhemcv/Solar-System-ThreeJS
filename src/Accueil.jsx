@@ -14,7 +14,6 @@ export const Accueil = () => {
           src={fusee}
           className="imgfusee"
           alt="fusée"
-          srcset=""
         />
         <h1 className="titre fade-in">
           Départ imminent pour le système solaire...
@@ -30,7 +29,6 @@ export const Accueil = () => {
             src={planetes}
             className="planetesacc"
             alt="planètes"
-            srcset=""
           />
         </div>
       </div>

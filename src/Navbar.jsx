@@ -32,13 +32,13 @@ export const Navbar = ({lien, planet}) => {
     <div>
       <nav>
         <a href="/">
-        <img src={logo} alt="logo navbar" className="logoNav" height="60px" srcset="" />
+        <img src={logo} alt="logo navbar" className="logoNav" height="60px"  />
         </a>
         {title !== "" && <p className='title pulsate-bck'><a href={showLien}>{title} - Cliquer pour + de détails</a></p>}
         <select name="planete" id="" onChange={(e) => handleChange(e)}>
           <option value="">Choisir une planète :</option>
           {planets.map((p) => (
-            <option className="planet" value={p.url}>
+            <option key={p.url} className="planet" value={p.url}>
               {p.name}
             </option>
           ))}

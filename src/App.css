@@ -576,6 +576,21 @@ li {
   width: 100px;
 }
 
+.hidden {
+  visibility: hidden;
+}
+
+.show {
+  visibility : visible;
+}
+
+.loading {
+  font-size : 40px;
+  text-align:center;
+  margin-top : 300px;
+  color: white;
+  height: 100vh;
+}
 
 @media screen and (max-width: 730px) {
   body {
