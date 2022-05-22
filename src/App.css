@@ -41,6 +41,9 @@ body {
   color: white;
   font-size: 15px;
   font-weight: bold;
+  background-color: #215CBB;
+  padding: 10px;
+  border-radius: 4px;
 }
 .title:hover {
   transform: scale(1.1);
@@ -647,6 +650,10 @@ h3 {
 
 .paragraphe {
   font-size : 15px;
+}
+
+.title {
+  margin-bottom: 10px;
 }
 
 select {
